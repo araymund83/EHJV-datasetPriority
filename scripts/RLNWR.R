@@ -51,6 +51,8 @@ crs_WT <- st_crs(4386)
 # Transform crs to WT crs
 pc_location2 <- st_as_sf(pc_location, coords = c("longitude", "latitude"), remove = FALSE, crs = crs_WT)
 
+unique(pc_location$name)
+unique(pc_location$short.name)
 
 ############################
 #### VISIT TABLE ####
@@ -76,6 +78,11 @@ write.csv(pc_N, file= file.path(out_dir, paste0(dataset_code,"_totalPC.csv")), r
 ############################
 
 df <- st_as_sf(pc_location2, coords = c('longitude', 'latitude'), remove = FALSE, crs = crs_WT)
+
+#write shapefile with no missing lat and lon
+out_path <- glue ('./SIG/{dataset_code}_GIS')
+ifelse(!dir.exists(out_path), dir.create(out_path), 'Folder already exists')
+st_write(pc_location2, glue('{out_path}/{dataset_code}.shp'))
 mapview(df, xcol = 'longitude', ycol = 'latitude', crs = crs_WT, grid = FALSE)
 
 

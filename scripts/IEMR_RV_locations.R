@@ -4,10 +4,7 @@
 # Author: "Ana Raymundo"
 # Date: "February 2nd, 2023"
 # ---Notes:
-# points projecting in the Atlantic, near Africa. Only St. Augustine River - control (site 2) 
-#337484 N	5762033 E	 UTM 21 shows up in Canada  && Treatment Churchill River 566060	5862600	20
-#data has two UTM zones 20 &21 no shapefile created
-
+# 
 
 
 
