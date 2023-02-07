@@ -4,7 +4,7 @@
 # Author: "Ana Raymundo"
 # Date: "February 3nd, 2023"
 # ---Notes:
-# 
+# points projecting in Antartida. Ask Melina about this issue 
 
 # Load libraries ----------------------------------------------------------
 update.packages()
@@ -112,13 +112,13 @@ crs_db <- st_crs(26920)
 # WildTrax CRS (EPSG: 4386)
 crs_WT <- st_crs(4386)
 pc_location2 <- st_as_sf(pc_location, coords = c('easting', 'northing'), remove = FALSE, crs = crs_db)
-pc_location2 <- st_as_sf(pc_visit, coords = c('longitude', 'latitude'), remove = FALSE, crs = crs_db)
-pc_location2 <- st_set_crs(pc_location2, crs_db)
+pc_location2 <- st_as_sf(survey_summ, coords = c('latitude', 'longitude'), remove = FALSE, crs = crs_db)
+pc_location2 <- st_set_crs(pc_location2, crs_WT)
 df <- st_transform(pc_location2,crs = crs_WT)
 #write shapefile with no missing lat and lon
 out_path <- glue ('./SIG/{dataset_code}_GIS/{project}')
 ifelse(!dir.exists(out_path), dir.create(out_path), 'Folder already exists')
 st_write(df, glue('{out_path}/{project}.shp'))
 #visualize map
-mapview(df, xcol = 'latitude', ycol = 'longitude', crs = crs_WT, grid = FALSE)
-mapview(pc_location2, xcol = 'longitude', ycol = 'latitude', crs = crs_WT, grid = FALSE)
+mapview(df)
+mapview(pc_location2, xcol = 'northing', ycol = 'easting', crs = crs_WT, grid = FALSE)
